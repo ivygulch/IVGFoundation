@@ -44,7 +44,6 @@ public class URLResourceCache {
         let urls = Array(cache.keys)
         for url in urls {
             if let expirationDate = cacheExpiration[url] where expirationDate.compare(flushDate) == .OrderedAscending {
-                print("DBG: expired, flush\(url)")
                 flushURL(url)
             }
         }
@@ -56,13 +55,11 @@ public class URLResourceCache {
         var reachedMaximumSize = false
         for url in urls {
             if reachedMaximumSize {
-                print("DBG: reachedMaximumSize.1, flush\(url)")
                 flushURL(url)
             } else if let data = cache[url] {
                 totalCacheSize += data.length
                 reachedMaximumSize = totalCacheSize > maximumSize
                 if reachedMaximumSize {
-                    print("DBG: reachedMaximumSize.2, flush\(url)")
                     flushURL(url)
                 }
             }
