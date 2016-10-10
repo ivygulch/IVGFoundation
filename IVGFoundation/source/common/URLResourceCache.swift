@@ -14,15 +14,61 @@ public enum URLResourceCacheError: ErrorType {
 
 public class URLResourceCache {
 
-    var cache: [NSURL: NSData] = [:]
-    var cacheOrder: [NSURL] = []
-    var cacheExpiration: [NSURL: NSDate] = [:]
-    let maximumSize: Int
-    let synchronizer = Synchronizer()
+    // MARK: - class functions
+
+    // MARK: - public functions
 
     public init(maximumMegabytes: Int) {
         maximumSize = maximumMegabytes * 1024 * 1024
     }
+
+    public func doWithImageURL(imageURL: NSURL?, completion: (UIImage? -> Void)) {
+        guard let imageURL = imageURL else {
+            completion(nil)
+            return
+        }
+
+        getData(withURL: imageURL) {
+            result in
+            switch result {
+            case .Success(let data):
+                completion(UIImage(data: data))
+            case .Failure(let error):
+                print("WARNING: error loading \(imageURL): \(error)")
+                completion(nil)
+            }
+        }
+    }
+    
+    public func getData(withURL url: NSURL, expiration: NSTimeInterval? = nil, completion: (Result<NSData> -> Void)) {
+        flushCache()
+        if let cachedData = getCachedData(url) {
+            completion(.Success(cachedData))
+            return
+        }
+
+        let requestDate = Clock.sharedClock.currentDate
+
+        let session = NSURLSession.sharedSession()
+
+        let request = NSURLRequest(URL: url)
+        let task = session.dataTaskWithRequest(request) {
+            [weak self] (data, response, error) in
+
+            if let data = data {
+                completion(.Success(data))
+                self?.cacheData(data, withURL: url, requestDate: requestDate, expiration: expiration)
+            } else if let error = error {
+                completion(.Failure(error))
+            } else {
+                completion(.Failure(URLResourceCacheError.InvalidResponse(value: response)))
+            }
+        }
+        
+        task.resume()
+    }
+
+    // MARK: - private functions
 
     private func flushCache() {
         synchronizer.execute {
@@ -90,32 +136,12 @@ public class URLResourceCache {
         }
     }
 
-    public func getData(withURL url: NSURL, expiration: NSTimeInterval? = nil, completion: (Result<NSData> -> Void)) {
-        flushCache()
-        if let cachedData = getCachedData(url) {
-            completion(.Success(cachedData))
-            return
-        }
+    // MARK: - private variables
 
-        let requestDate = Clock.sharedClock.currentDate
-
-        let session = NSURLSession.sharedSession()
-
-        let request = NSURLRequest(URL: url)
-        let task = session.dataTaskWithRequest(request) {
-            [weak self] (data, response, error) in
-
-            if let data = data {
-                completion(.Success(data))
-                self?.cacheData(data, withURL: url, requestDate: requestDate, expiration: expiration)
-            } else if let error = error {
-                completion(.Failure(error))
-            } else {
-                completion(.Failure(URLResourceCacheError.InvalidResponse(value: response)))
-            }
-        }
-
-        task.resume()
-    }
-
+    var cache: [NSURL: NSData] = [:]
+    var cacheOrder: [NSURL] = []
+    var cacheExpiration: [NSURL: NSDate] = [:]
+    let maximumSize: Int
+    let synchronizer = Synchronizer()
+    
 }
