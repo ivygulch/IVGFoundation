@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F84F68781DADB2D1008F57BB /* NSFileManager+IVGFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84F68771DADB2D1008F57BB /* NSFileManager+IVGFoundation.swift */; };
+		F84F687A1DADB93C008F57BB /* NSURL+IVGFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84F68791DADB93C008F57BB /* NSURL+IVGFoundation.swift */; };
+		F84F687E1DADC6E2008F57BB /* NSString+IVGFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84F687D1DADC6E2008F57BB /* NSString+IVGFoundation.swift */; };
 		F85F929C1DA1755F00241AB7 /* IVGFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F85F92911DA1755F00241AB7 /* IVGFoundation.framework */; };
-		F85F92A11DA1755F00241AB7 /* IVGFoundationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F92A01DA1755F00241AB7 /* IVGFoundationTests.swift */; };
 		F85F92B31DA17F2F00241AB7 /* Clock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F92AE1DA17F2F00241AB7 /* Clock.swift */; };
 		F85F92B41DA17F2F00241AB7 /* Synchronizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F92AF1DA17F2F00241AB7 /* Synchronizer.swift */; };
 		F85F92B51DA17F2F00241AB7 /* TypeKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F92B01DA17F2F00241AB7 /* TypeKey.swift */; };
@@ -28,10 +30,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F84F68771DADB2D1008F57BB /* NSFileManager+IVGFoundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSFileManager+IVGFoundation.swift"; sourceTree = "<group>"; };
+		F84F68791DADB93C008F57BB /* NSURL+IVGFoundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURL+IVGFoundation.swift"; sourceTree = "<group>"; };
+		F84F687D1DADC6E2008F57BB /* NSString+IVGFoundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSString+IVGFoundation.swift"; sourceTree = "<group>"; };
 		F85F92911DA1755F00241AB7 /* IVGFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IVGFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F85F92961DA1755F00241AB7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F85F929B1DA1755F00241AB7 /* IVGFoundationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IVGFoundationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F85F92A01DA1755F00241AB7 /* IVGFoundationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IVGFoundationTests.swift; sourceTree = "<group>"; };
 		F85F92A21DA1755F00241AB7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F85F92AE1DA17F2F00241AB7 /* Clock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clock.swift; sourceTree = "<group>"; };
 		F85F92AF1DA17F2F00241AB7 /* Synchronizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Synchronizer.swift; sourceTree = "<group>"; };
@@ -62,6 +66,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F84F68761DADB2BE008F57BB /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F84F68771DADB2D1008F57BB /* NSFileManager+IVGFoundation.swift */,
+				F84F68791DADB93C008F57BB /* NSURL+IVGFoundation.swift */,
+				F84F687D1DADC6E2008F57BB /* NSString+IVGFoundation.swift */,
+			);
+			path = extensions;
+			sourceTree = "<group>";
+		};
 		F85F92871DA1755F00241AB7 = {
 			isa = PBXGroup;
 			children = (
@@ -95,7 +109,6 @@
 			isa = PBXGroup;
 			children = (
 				F85F92AB1DA17F2900241AB7 /* tests */,
-				F85F92A01DA1755F00241AB7 /* IVGFoundationTests.swift */,
 				F85F92A21DA1755F00241AB7 /* Info.plist */,
 			);
 			path = IVGFoundationTests;
@@ -112,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				F85F92AD1DA17F2F00241AB7 /* common */,
+				F84F68761DADB2BE008F57BB /* extensions */,
 				F85F92B21DA17F2F00241AB7 /* IVGFoundation.h */,
 			);
 			path = source;
@@ -239,9 +253,12 @@
 			files = (
 				F85F92B61DA17F2F00241AB7 /* URLResourceCache.swift in Sources */,
 				F85F92B51DA17F2F00241AB7 /* TypeKey.swift in Sources */,
+				F84F687A1DADB93C008F57BB /* NSURL+IVGFoundation.swift in Sources */,
 				F85F92BD1DA17FE200241AB7 /* Types.swift in Sources */,
 				F85F92B31DA17F2F00241AB7 /* Clock.swift in Sources */,
+				F84F68781DADB2D1008F57BB /* NSFileManager+IVGFoundation.swift in Sources */,
 				F85F92B41DA17F2F00241AB7 /* Synchronizer.swift in Sources */,
+				F84F687E1DADC6E2008F57BB /* NSString+IVGFoundation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,7 +266,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F85F92A11DA1755F00241AB7 /* IVGFoundationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
