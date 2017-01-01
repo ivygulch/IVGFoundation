@@ -8,29 +8,29 @@
 
 import Foundation
 
-public extension NSURL {
+public extension URL {
 
-    private struct AssociatedKey {
+    fileprivate struct AssociatedKey {
         static var invalidFilenameCharacterSet = "invalidFilenameCharacterSet"
     }
 
-    private var invalidFilenameCharacterSet: NSCharacterSet {
+    fileprivate var invalidFilenameCharacterSet: CharacterSet {
         get {
-            if let result = objc_getAssociatedObject(self, &AssociatedKey.invalidFilenameCharacterSet) as? NSCharacterSet {
+            if let result = objc_getAssociatedObject(self, &AssociatedKey.invalidFilenameCharacterSet) as? CharacterSet {
                 return result
             }
-            var result = NSMutableCharacterSet(charactersInString: ":/")
-            result.formUnionWithCharacterSet(NSCharacterSet.newlineCharacterSet())
-            result.formUnionWithCharacterSet(NSCharacterSet.illegalCharacterSet())
-            result.formUnionWithCharacterSet(NSCharacterSet.controlCharacterSet())
+            let result = NSMutableCharacterSet(charactersIn: ":/")
+            result.formUnion(with: CharacterSet.newlines)
+            result.formUnion(with: CharacterSet.illegalCharacters)
+            result.formUnion(with: CharacterSet.controlCharacters)
 
             objc_setAssociatedObject(self, &AssociatedKey.invalidFilenameCharacterSet, result, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            return result
+            return result as CharacterSet
         }
     }
 
     var localFilename: String {
-        return absoluteString.componentsSeparatedByCharactersInSet(invalidFilenameCharacterSet).joinWithSeparator("_")
+        return absoluteString.components(separatedBy: invalidFilenameCharacterSet).joined(separator: "_")
     }
     
 }

@@ -205,6 +205,7 @@
 				TargetAttributes = {
 					F85F92901DA1755F00241AB7 = {
 						CreatedOnToolsVersion = 7.3;
+						LastSwiftMigration = 0810;
 					};
 					F85F929A1DA1755F00241AB7 = {
 						CreatedOnToolsVersion = 7.3;
@@ -385,6 +386,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ivygulch.IVGFoundation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -402,6 +404,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ivygulch.IVGFoundation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

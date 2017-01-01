@@ -8,8 +8,8 @@
 
 import Foundation
 
-public enum URLResourceCacheError: ErrorType {
-    case InvalidResponse(value: NSURLResponse?)
+public enum URLResourceCacheError: Error {
+    case invalidResponse(value: URLResponse?)
 }
 
 public class URLResourceCache {
@@ -21,7 +21,7 @@ public class URLResourceCache {
     public init() {
     }
 
-    public func doWithURL(url: NSURL?, expiration: NSDate?, completion: (NSData? -> Void)) {
+    public func doWithURL(_ url: URL?, expiration: Date?, completion:@escaping  ((Data?) -> Void)) {
         guard let url = url else {
             completion(nil)
             return
@@ -30,48 +30,48 @@ public class URLResourceCache {
         getData(withURL: url, expiration: expiration) {
             result in
             switch result {
-            case .Success(let data):
+            case .success(let data):
                 completion(data)
-            case .Failure(let error):
+            case .failure(let error):
                 print("WARNING: error loading \(url): \(error)")
                 completion(nil)
             }
         }
     }
 
-    public func getData(withURL url: NSURL, expiration: NSDate?, completion: (Result<NSData> -> Void)) {
+    public func getData(withURL url: URL, expiration: Date?, completion: @escaping ((Result<Data>) -> Void)) {
         if let expiration = expiration {
             flushURL(url, withExpiration: expiration)
         }
 
         if let cachedData = getCachedData(url) {
-            completion(.Success(cachedData))
+            completion(.success(cachedData))
             return
         }
 
 
-        let session = NSURLSession.sharedSession()
+        let session = URLSession.shared
 
-        let request = NSURLRequest(URL: url)
-        let task = session.dataTaskWithRequest(request) {
+        let request = URLRequest(url: url)
+        let task = session.dataTask(with: request, completionHandler: {
             [weak self] (data, response, error) in
 
             if let data = data {
-                completion(.Success(data))
+                completion(.success(data))
                 self?.cacheData(data, withURL: url)
             } else if let error = error {
-                completion(.Failure(error))
+                completion(.failure(error))
             } else {
-                completion(.Failure(URLResourceCacheError.InvalidResponse(value: response)))
+                completion(.failure(URLResourceCacheError.invalidResponse(value: response)))
             }
-        }
+        }) 
         
         task.resume()
     }
 
     // MARK: - private functions
 
-    private func flushURL(url: NSURL, withExpiration expiration: NSDate) {
+    fileprivate func flushURL(_ url: URL, withExpiration expiration: Date) {
         do {
             try url.localFilename.removeLocallyCachedData(withExpiration: expiration)
         } catch (let error) {
@@ -79,7 +79,7 @@ public class URLResourceCache {
         }
     }
 
-    private func cacheData(data: NSData, withURL url: NSURL) {
+    fileprivate func cacheData(_ data: Data, withURL url: URL) {
         synchronizer.execute {
             do {
                 try url.localFilename.saveLocallyCachedData(data)
@@ -89,7 +89,7 @@ public class URLResourceCache {
         }
     }
 
-    private func getCachedData(url: NSURL) -> NSData? {
+    fileprivate func getCachedData(_ url: URL) -> Data? {
         return synchronizer.valueOf {
             do {
                 return try url.localFilename.getLocallyCachedData()
@@ -108,8 +108,8 @@ public class URLResourceCache {
 
 public extension URLResourceCache {
     
-    public func doWithImageURL(url: NSURL?, expiration: NSDate?, completion: (UIImage? -> Void)) {
-        let urlCompletion: (NSData? -> Void) = { data in
+    public func doWithImageURL(_ url: URL?, expiration: Date?, completion: @escaping ((UIImage?) -> Void)) {
+        let urlCompletion: ((Data?) -> Void) = { data in
             if let data = data {
                 completion(UIImage(data: data))
             } else {
@@ -124,31 +124,31 @@ public extension URLResourceCache {
 private extension String {
 
     func localPath(createDirectories shouldCreateDirectories: Bool) throws -> String {
-        let cacheDirectory = try NSFileManager.defaultManager().cachesSubdirectory(String(URLResourceCache), create: shouldCreateDirectories)
+        let cacheDirectory = try FileManager.default.cachesSubdirectory(String(describing: URLResourceCache.self), create: shouldCreateDirectories)
         return cacheDirectory.stringByAppendingPathComponent(self)
     }
 
-    func getLocallyCachedData() throws -> NSData? {
-        return try NSData(contentsOfFile: localPath(createDirectories: false))
+    func getLocallyCachedData() throws -> Data? {
+        return try Data(contentsOf: URL(fileURLWithPath: localPath(createDirectories: false)))
     }
 
-    func removeLocallyCachedData(withExpiration expiration: NSDate) throws {
+    func removeLocallyCachedData(withExpiration expiration: Date) throws {
         let path = try localPath(createDirectories: false)
-        guard NSFileManager.defaultManager().fileExistsAtPath(path) else {
+        guard FileManager.default.fileExists(atPath: path) else {
             return
         }
-        let attributes = try NSFileManager.defaultManager().attributesOfItemAtPath(path)
-        guard let modifiedDate = attributes[NSFileModificationDate] as? NSDate else {
+        let attributes = try FileManager.default.attributesOfItem(atPath: path)
+        guard let modifiedDate = attributes[FileAttributeKey.modificationDate] as? Date else {
             print("WARNING: Could not get modificationDate for \(path): \(attributes)")
             return
         }
-        if modifiedDate.compare(expiration) == .OrderedAscending {
-            try NSFileManager.defaultManager().removeItemAtPath(path)
+        if modifiedDate.compare(expiration) == .orderedAscending {
+            try FileManager.default.removeItem(atPath: path)
         }
     }
 
-    func saveLocallyCachedData(data: NSData) throws {
-        try data.writeToFile(localPath(createDirectories: true), options: [.AtomicWrite])
+    func saveLocallyCachedData(_ data: Data) throws {
+        try data.write(to: URL(fileURLWithPath: localPath(createDirectories: true)), options: [.atomicWrite])
     }
 
 }

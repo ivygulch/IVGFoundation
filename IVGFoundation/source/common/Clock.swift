@@ -12,19 +12,19 @@ public class Clock {
 
     public static let sharedClock = Clock()
 
-    private init() {}
+    fileprivate init() {}
 
-    public var testDate: NSDate?
+    public var testDate: Date?
 
-    public func testDateAfterIncrementing(timeInterval: NSTimeInterval) {
+    public func testDateAfterIncrementing(_ timeInterval: TimeInterval) {
         if testDate == nil {
-            testDate = NSDate()
+            testDate = Date()
         }
-        testDate = testDate?.dateByAddingTimeInterval(timeInterval)
+        testDate = testDate?.addingTimeInterval(timeInterval)
     }
 
-    public var currentDate: NSDate {
-        return testDate ?? NSDate()
+    public var currentDate: Date {
+        return testDate ?? Date()
     }
 
     public var isActualDate: Bool {

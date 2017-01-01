@@ -9,30 +9,30 @@
 import Foundation
 
 public class Synchronizer {
-    private let queue:dispatch_queue_t
+    fileprivate let queue:DispatchQueue
 
     public init() {
-        let uuid = NSUUID().UUIDString
-        self.queue = dispatch_queue_create("Sync.\(uuid)",nil)
+        let uuid = UUID().uuidString
+        self.queue = DispatchQueue(label: "Sync.\(uuid)",attributes: [])
     }
 
     public init(queueName:String) {
-        self.queue = dispatch_queue_create(queueName,nil)
+        self.queue = DispatchQueue(label: queueName,attributes: [])
     }
 
-    public init(queue:dispatch_queue_t) {
+    public init(queue:DispatchQueue) {
         self.queue = queue
     }
 
-    public func execute(closure:()->Void) {
-        dispatch_sync(queue, {
+    public func execute(_ closure:()->Void) {
+        queue.sync(execute: {
             closure()
         })
     }
 
-    public func valueOf<T>(closure:()->T) -> T {
+    public func valueOf<T>(_ closure:()->T) -> T {
         var result:T!
-        dispatch_sync(queue, {
+        queue.sync(execute: {
             result = closure()
         })
         return result
