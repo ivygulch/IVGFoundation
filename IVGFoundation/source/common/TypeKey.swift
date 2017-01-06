@@ -17,7 +17,7 @@ public struct TypeKey: Hashable {
         return keyName.hashValue
     }
 
-    private var keyName: String
+    fileprivate var keyName: String
 }
 
 public func ==(lhs: TypeKey, rhs: TypeKey) -> Bool {
