@@ -71,7 +71,7 @@ public class URLResourceCache {
 
     // MARK: - private functions
 
-    fileprivate func flushURL(_ url: URL, withExpiration expiration: Date) {
+    private func flushURL(_ url: URL, withExpiration expiration: Date) {
         do {
             try url.localFilename.removeLocallyCachedData(withExpiration: expiration)
         } catch (let error) {
@@ -79,7 +79,7 @@ public class URLResourceCache {
         }
     }
 
-    fileprivate func cacheData(_ data: Data, withURL url: URL) {
+    private func cacheData(_ data: Data, withURL url: URL) {
         synchronizer.execute {
             do {
                 try url.localFilename.saveLocallyCachedData(data)
@@ -89,7 +89,7 @@ public class URLResourceCache {
         }
     }
 
-    fileprivate func getCachedData(_ url: URL) -> Data? {
+    private func getCachedData(_ url: URL) -> Data? {
         return synchronizer.valueOf {
             do {
                 return try url.localFilename.getLocallyCachedData()

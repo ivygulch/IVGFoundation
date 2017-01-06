@@ -12,7 +12,7 @@ public class Clock {
 
     public static let sharedClock = Clock()
 
-    fileprivate init() {}
+    private init() {}
 
     public var testDate: Date?
 

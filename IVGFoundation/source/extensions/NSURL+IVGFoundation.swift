@@ -10,11 +10,11 @@ import Foundation
 
 public extension URL {
 
-    fileprivate struct AssociatedKey {
+    private struct AssociatedKey {
         static var invalidFilenameCharacterSet = "invalidFilenameCharacterSet"
     }
 
-    fileprivate var invalidFilenameCharacterSet: CharacterSet {
+    private var invalidFilenameCharacterSet: CharacterSet {
         get {
             if let result = objc_getAssociatedObject(self, &AssociatedKey.invalidFilenameCharacterSet) as? CharacterSet {
                 return result
