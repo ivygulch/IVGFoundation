@@ -27,8 +27,7 @@ public class URLResourceCache {
             return
         }
 
-        getData(withURL: url, expiration: expiration) {
-            result in
+        getData(withURL: url, expiration: expiration) { result in
             switch result {
             case .success(let data):
                 completion(data)
@@ -53,8 +52,7 @@ public class URLResourceCache {
         let session = URLSession.shared
 
         let request = URLRequest(url: url)
-        let task = session.dataTask(with: request, completionHandler: {
-            [weak self] (data, response, error) in
+        let task = session.dataTask(with: request, completionHandler: { [weak self] (data, response, error) in
 
             if let data = data {
                 completion(.success(data))
