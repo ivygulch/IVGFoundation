@@ -19,7 +19,7 @@ public extension URL {
             if let result = objc_getAssociatedObject(self, &AssociatedKey.invalidFilenameCharacterSet) as? CharacterSet {
                 return result
             }
-            let result = NSMutableCharacterSet(charactersIn: ":/")
+            let result = NSMutableCharacterSet(charactersIn: ": /")
             result.formUnion(with: CharacterSet.newlines)
             result.formUnion(with: CharacterSet.illegalCharacters)
             result.formUnion(with: CharacterSet.controlCharacters)

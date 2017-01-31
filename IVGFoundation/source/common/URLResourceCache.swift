@@ -21,7 +21,7 @@ public class URLResourceCache {
     public init() {
     }
 
-    public func doWithURL(_ url: URL?, expiration: Date?, completion:@escaping  ((Data?) -> Void)) {
+    public func doWithURL(_ url: URL?, expiration: Date?, completion: @escaping  ((Data?) -> Void)) {
         guard let url = url else {
             completion(nil)
             return
@@ -29,9 +29,9 @@ public class URLResourceCache {
 
         getData(withURL: url, expiration: expiration) { result in
             switch result {
-            case .success(let data):
+            case .success(let data): 
                 completion(data)
-            case .failure(let error):
+            case .failure(let error): 
                 print("WARNING: error loading \(url): \(error)")
                 completion(nil)
             }

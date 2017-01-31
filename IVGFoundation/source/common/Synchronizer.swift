@@ -9,29 +9,29 @@
 import Foundation
 
 public class Synchronizer {
-    private let queue:DispatchQueue
+    private let queue: DispatchQueue
 
     public init() {
         let uuid = UUID().uuidString
         self.queue = DispatchQueue(label: "Sync.\(uuid)",attributes: [])
     }
 
-    public init(queueName:String) {
+    public init(queueName: String) {
         self.queue = DispatchQueue(label: queueName,attributes: [])
     }
 
-    public init(queue:DispatchQueue) {
+    public init(queue: DispatchQueue) {
         self.queue = queue
     }
 
-    public func execute(_ closure:()->Void) {
+    public func execute(_ closure: ()->Void) {
         queue.sync(execute: {
             closure()
         })
     }
 
-    public func valueOf<T>(_ closure:()->T) -> T {
-        var result:T!
+    public func valueOf<T>(_ closure: ()->T) -> T {
+        var result: T!
         queue.sync(execute: {
             result = closure()
         })

@@ -21,7 +21,7 @@ public extension FileManager {
     private func subdirectoryOf(_ path: String, withName name: String, create shouldCreate: Bool = false) throws -> String {
         let result = path.stringByAppendingPathComponent(name)
         if !fileExists(atPath: result, isDirectory: nil) && shouldCreate {
-            try createDirectory(atPath: result, withIntermediateDirectories: true, attributes: [:])
+            try createDirectory(atPath: result, withIntermediateDirectories: true, attributes: [: ])
         }
         return result
     }
