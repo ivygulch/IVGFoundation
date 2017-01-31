@@ -16,7 +16,7 @@ public class Clock {
 
     public var testDate: Date?
 
-    public func testDateAfterIncrementing(_ timeInterval: TimeInterval) {
+    public func testDateAfterIncrementing(byTimeInterval timeInterval: TimeInterval) {
         if testDate == nil {
             testDate = Date()
         }

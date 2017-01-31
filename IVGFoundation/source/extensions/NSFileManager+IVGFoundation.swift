@@ -18,7 +18,7 @@ public extension FileManager {
         return NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)[0]
     }
 
-    private func subdirectoryOf(_ path: String, withName name: String, create shouldCreate: Bool = false) throws -> String {
+    private func subdirectoryOf(path: String, withName name: String, create shouldCreate: Bool = false) throws -> String {
         let result = path.stringByAppendingPathComponent(name)
         if !fileExists(atPath: result, isDirectory: nil) && shouldCreate {
             try createDirectory(atPath: result, withIntermediateDirectories: true, attributes: [: ])
@@ -26,12 +26,12 @@ public extension FileManager {
         return result
     }
 
-    public func documentsSubdirectory(_ name: String, create shouldCreate: Bool = false) throws -> String {
-        return try subdirectoryOf(documentsDirectory, withName: name, create: shouldCreate)
+    public func documentsSubdirectory(withName name: String, create shouldCreate: Bool = false) throws -> String {
+        return try subdirectoryOf(path: documentsDirectory, withName: name, create: shouldCreate)
     }
 
-    public func cachesSubdirectory(_ name: String, create shouldCreate: Bool = false) throws -> String {
-        return try subdirectoryOf(cachesDirectory, withName: name, create: shouldCreate)
+    public func cachesSubdirectory(withName name: String, create shouldCreate: Bool = false) throws -> String {
+        return try subdirectoryOf(path: cachesDirectory, withName: name, create: shouldCreate)
     }
 
 }
