@@ -14,4 +14,14 @@ public extension String {
         return (self as NSString).appendingPathComponent(value)
     }
 
+    public var attributedStringFromHTML: NSAttributedString? {
+        guard let data = self.data(using: .utf16, allowLossyConversion: false) else { return nil }
+        guard let result = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil) else { return nil }
+        return result
+    }
+
+    public var stringFromHTML: String? {
+        return attributedStringFromHTML?.string
+    }
+
 }
