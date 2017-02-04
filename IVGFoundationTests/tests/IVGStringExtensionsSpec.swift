@@ -36,7 +36,6 @@ class IVGStringExtensionsSpec: QuickSpec {
                 
             }
         }
-        }
     }
 }
 
