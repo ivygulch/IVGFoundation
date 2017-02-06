@@ -1,5 +1,5 @@
 //
-//  IVGStringExtensionsSpec.swift
+//  StringExtensionsSpec.swift
 //  IVGFoundation
 //
 //  Created by Douglas Sjoquist on 2/4/17.
@@ -10,7 +10,7 @@ import Quick
 import Nimble
 import IVGFoundation
 
-class IVGStringExtensionsSpec: QuickSpec {
+class StringExtensionsSpec: QuickSpec {
 
     override func spec() {
 
