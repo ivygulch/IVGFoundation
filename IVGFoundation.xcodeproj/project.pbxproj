@@ -798,6 +798,7 @@
 				F8B8B2C21E463D60004542AB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
