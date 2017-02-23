@@ -16,6 +16,7 @@
 		F85F92B61DA17F2F00241AB7 /* URLResourceCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F92B11DA17F2F00241AB7 /* URLResourceCache.swift */; };
 		F85F92B71DA17F2F00241AB7 /* IVGFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = F85F92B21DA17F2F00241AB7 /* IVGFoundation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F85F92BD1DA17FE200241AB7 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F92BC1DA17FE200241AB7 /* Types.swift */; };
+		F88070171E4E0BCE0052468D /* String+IVGFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88070161E4E0BCE0052468D /* String+IVGFoundation.swift */; };
 		F8B8B2BD1E463D60004542AB /* IVGFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F85F92911DA1755F00241AB7 /* IVGFoundation.framework */; };
 		F8B8B2C51E463DE8004542AB /* StringExtensionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B8B2C41E463DE8004542AB /* StringExtensionsSpec.swift */; };
 		F8B8B3031E4640DD004542AB /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8B8B2FB1E46409B004542AB /* Nimble.framework */; };
@@ -174,6 +175,7 @@
 		F85F92B81DA17F3600241AB7 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		F85F92B91DA17F3600241AB7 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F85F92BC1DA17FE200241AB7 /* Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
+		F88070161E4E0BCE0052468D /* String+IVGFoundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+IVGFoundation.swift"; sourceTree = "<group>"; };
 		F8B8B2B81E463D60004542AB /* IVGFoundationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IVGFoundationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8B8B2C41E463DE8004542AB /* StringExtensionsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensionsSpec.swift; sourceTree = "<group>"; };
 		F8B8B2C61E463F36004542AB /* Quick.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Quick.xcodeproj; path = external/Quick/Quick.xcodeproj; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 				F84F68791DADB93C008F57BB /* NSURL+IVGFoundation.swift */,
 				F84F687D1DADC6E2008F57BB /* NSString+IVGFoundation.swift */,
 				F8B8B30A1E467712004542AB /* NSAttributedString+IVGFoundation.swift */,
+				F88070161E4E0BCE0052468D /* String+IVGFoundation.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -586,6 +589,7 @@
 				F84F68781DADB2D1008F57BB /* NSFileManager+IVGFoundation.swift in Sources */,
 				F8B8B30B1E467712004542AB /* NSAttributedString+IVGFoundation.swift in Sources */,
 				F85F92B41DA17F2F00241AB7 /* Synchronizer.swift in Sources */,
+				F88070171E4E0BCE0052468D /* String+IVGFoundation.swift in Sources */,
 				F84F687E1DADC6E2008F57BB /* NSString+IVGFoundation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
