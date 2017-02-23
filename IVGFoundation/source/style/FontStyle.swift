@@ -1,6 +1,6 @@
 //
 //  FontStyle.swift
-//  TherexRx
+//  IVGFoundation
 //
 //  Created by Douglas Sjoquist on 1/26/17.
 //  Copyright © 2017 Ivy Gulch LLC. All rights reserved.
