@@ -8,22 +8,53 @@
 
 import UIKit
 
-public struct FontStyle {
-    public let family: String?
-    public let size: CGFloat?
-    public let textColor: UIColor?
-    public let font: UIFont?
+public enum FontType {
+    // System fonts are special cases. Apple says the actual font names for them are private, so set up special flags
+    case system(CGFloat?)
+    case custom(String)
 
-    public init(style: FontStyle? = nil, family: String? = nil, size: CGFloat? = nil, textColor: UIColor? = nil) {
-        self.family = family ?? style?.family
-        self.size = size ?? style?.size
+    public func font(withSize size: CGFloat) -> UIFont? {
+        switch self {
+        case let .system(weight):
+            if let weight = weight {
+                return UIFont.systemFont(ofSize: size, weight: weight)
+            } else {
+                return UIFont.systemFont(ofSize: size)
+            }
+        case let .custom(family):
+            return UIFont(name: family, size: size)
+        }
+    }
+
+}
+
+public extension FontType {
+    public static let systemRegular = FontType.system(nil)
+    public static let systemSemibold = FontType.system(UIFontWeightSemibold)
+    public static let systemBold = FontType.system(UIFontWeightBold)
+    public static let systemMedium = FontType.system(UIFontWeightMedium)
+}
+
+public struct FontStyleConstants {
+    public static let defaultSize: CGFloat = 12.0
+
+}
+public struct FontStyle {
+    public let type: FontType?
+    public let size: CGFloat
+    public let textColor: UIColor?
+    public var font: UIFont?
+
+    public init(style: FontStyle? = nil, type: FontType? = nil, size: CGFloat? = nil, textColor: UIColor? = nil) {
+        self.type = type ?? style?.type
+        self.size = size ?? style?.size ?? FontStyleConstants.defaultSize
         self.textColor = textColor ?? style?.textColor
 
-        if let family = family, let size = size {
-            if let font = UIFont(name: family, size: size) {
+        if let type = self.type {
+            if let font = type.font(withSize: self.size) {
                 self.font = font
             } else {
-                print("WARNING: Could not load font: \(family) \(size)")
+                print("WARNING: Could not load font: \(self.type) \(self.size)")
                 self.font = nil
             }
         } else {
@@ -31,27 +62,27 @@ public struct FontStyle {
         }
     }
 
-    public func setFamily(_ family: String) -> FontStyle {
-        return FontStyle(style: self, family: family)
+    public func setType(_ type: FontType) -> FontStyle {
+        return FontStyle(style: self, type: type)
     }
 
     public func setSize(_ size: CGFloat) -> FontStyle {
         return FontStyle(style: self, size: size)
     }
 
-    public func setTextColor(_ textColor: UIColor) -> FontStyle {
+    public func setTextColor(_ textColor: UIColor?) -> FontStyle {
         return FontStyle(style: self, textColor: textColor)
     }
 
     public func setFont(_ font: UIFont) -> FontStyle {
-        return FontStyle(style: self, family: font.familyName, size: font.pointSize)
+        return FontStyle(style: self, type: .custom(font.familyName), size: font.pointSize)
     }
 
-    public func style(family: String? = nil, size: CGFloat? = nil, textColor: UIColor? = nil) -> FontStyle {
-        let useFamily = family ?? self.family
+    public func style(type: FontType? = nil, size: CGFloat? = nil, textColor: UIColor? = nil) -> FontStyle {
+        let useType = type ?? self.type
         let useSize = size ?? self.size
         let useTextColor = textColor ?? self.textColor
-        return FontStyle(family: useFamily, size: useSize, textColor: useTextColor)
+        return FontStyle(type: useType, size: useSize, textColor: useTextColor)
     }
 
     private func apply(block: @escaping (() -> Void), animated: Bool = true, duration: TimeInterval? = nil) {
@@ -88,6 +119,19 @@ public struct FontStyle {
         }, animated: animated)
     }
 
+    public func apply(toTextView textView: UITextView?, animated: Bool = true) {
+        guard let textView = textView else { return }
+
+        apply(block: {
+            if let font = self.font {
+                textView.font = font
+            }
+            if let textColor = self.textColor {
+                textView.textColor = textColor
+            }
+        }, animated: animated)
+    }
+
     public func apply(toButton button: UIButton?, controlState: UIControlState = .normal, animated: Bool = true) {
         guard let button = button else { return }
 
@@ -106,9 +150,22 @@ public struct FontStyle {
             apply(toLabel: label, animated: animated)
         } else if let textField = to as? UITextField {
             apply(toTextField: textField, animated: animated)
+        } else if let textView = to as? UITextView {
+            apply(toTextView: textView, animated: animated)
         } else if let button = to as? UIButton {
             apply(toButton: button, animated: animated)
-        } 
+        }
     }
 
+    public var attributes: [String: AnyObject]  {
+        var result: [String: AnyObject] = [:]
+        if let textColor = textColor {
+            result[NSForegroundColorAttributeName] = textColor
+        }
+        if let font = font {
+            result[NSFontAttributeName] = font
+        }
+        return result
+    }
+    
 }
