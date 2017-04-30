@@ -242,7 +242,10 @@ public struct ContainerStyle {
             self.applyControlValues(toView: button)
 
             if let backgroundColor = self.backgroundColor {
-                button.backgroundColor = backgroundColor
+                button.setBackgroundColor(color: backgroundColor, forState: .normal)
+            }
+            if let selectedColor = self.selectedColor {
+                button.setBackgroundColor(color: selectedColor, forState: .selected)
             }
             if let adjustsFontSizeToFitWidth = self.adjustsFontSizeToFitWidth {
                 button.titleLabel?.adjustsFontSizeToFitWidth = adjustsFontSizeToFitWidth
