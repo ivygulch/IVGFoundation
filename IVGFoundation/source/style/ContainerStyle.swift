@@ -18,17 +18,21 @@ public struct ContainerStyle {
     public let shadowOffset: CGSize?
     public let normalFontStyle: FontStyle?
     public let selectedFontStyle: FontStyle?
+    public let otherFontStyle: FontStyle?
+    public let otherData: Any?
     public let height: CGFloat?
     public let adjustsFontSizeToFitWidth: Bool?
     public let minimumScaleFactor: CGFloat?
     public let horizontalAlignment: UIControlContentHorizontalAlignment?
     public let verticalAlignment: UIControlContentVerticalAlignment?
 
-    public init(style: ContainerStyle? = nil, backgroundColor: UIColor? = nil, normalFontStyle: FontStyle? = nil, selectedColor: UIColor? = nil, selectedFontStyle: FontStyle? = nil, borderColor: UIColor? = nil, borderWidth: CGFloat? = nil, cornerRadius: CGFloat? = nil, shadowColor: UIColor? = nil, shadowOffset: CGSize? = nil, height: CGFloat? = nil, adjustsFontSizeToFitWidth: Bool? = nil, minimumScaleFactor: CGFloat? = nil, horizontalAlignment: UIControlContentHorizontalAlignment? = nil, verticalAlignment: UIControlContentVerticalAlignment? = nil) {
+    public init(style: ContainerStyle? = nil, backgroundColor: UIColor? = nil, normalFontStyle: FontStyle? = nil, selectedColor: UIColor? = nil, selectedFontStyle: FontStyle? = nil, otherFontStyle: FontStyle? = nil, otherData: Any? = nil, borderColor: UIColor? = nil, borderWidth: CGFloat? = nil, cornerRadius: CGFloat? = nil, shadowColor: UIColor? = nil, shadowOffset: CGSize? = nil, height: CGFloat? = nil, adjustsFontSizeToFitWidth: Bool? = nil, minimumScaleFactor: CGFloat? = nil, horizontalAlignment: UIControlContentHorizontalAlignment? = nil, verticalAlignment: UIControlContentVerticalAlignment? = nil) {
         self.backgroundColor = backgroundColor ?? style?.backgroundColor
         self.normalFontStyle = normalFontStyle ?? style?.normalFontStyle
         self.selectedColor = selectedColor ?? style?.selectedColor
         self.selectedFontStyle = selectedFontStyle ?? style?.selectedFontStyle
+        self.otherFontStyle = otherFontStyle ?? style?.otherFontStyle
+        self.otherData = otherData ?? style?.otherData
         self.borderColor = borderColor ?? style?.borderColor
         self.borderWidth = borderWidth ?? style?.borderWidth
         self.cornerRadius = cornerRadius ?? style?.cornerRadius
@@ -75,6 +79,14 @@ public struct ContainerStyle {
 
     public func setSelectedFontStyle(_ selectedFontStyle: FontStyle) -> ContainerStyle {
         return ContainerStyle(style: self, selectedFontStyle: selectedFontStyle)
+    }
+
+    public func setOtherFontStyle(_ otherFontStyle: FontStyle) -> ContainerStyle {
+        return ContainerStyle(style: self, otherFontStyle: otherFontStyle)
+    }
+
+    public func setOtherData(_ otherData: Any) -> ContainerStyle {
+        return ContainerStyle(style: self, otherData: otherData)
     }
 
     public func setHeight(_ height: CGFloat) -> ContainerStyle {
@@ -173,6 +185,43 @@ public struct ContainerStyle {
         }, animated: animated)
     }
 
+    public func apply(toSearchTextField searchTextField: UITextField, animated: Bool = true) {
+        apply(block: {
+            if let backgroundColor = self.backgroundColor {
+                searchTextField.backgroundColor = backgroundColor
+            }
+            self.apply(toLayer: searchTextField.layer)
+
+            self.normalFontStyle?.apply(toTextField: searchTextField, animated: false)
+
+            let placeholderText = (self.otherData as? String) ?? searchTextField.placeholder ?? "Search"
+            if let otherFontStyle = self.otherFontStyle {
+                var attributes: [String: Any] = [:]
+                if let font = otherFontStyle.font {
+                    attributes[NSFontAttributeName] = font
+                }
+                if let textColor = otherFontStyle.textColor {
+                    attributes[NSForegroundColorAttributeName] = textColor
+                }
+                searchTextField.attributedPlaceholder = NSAttributedString(string: placeholderText, attributes: attributes)
+            } else {
+                searchTextField.placeholder = placeholderText
+            }
+            self.selectedFontStyle?.apply(toTextField: searchTextField, animated: false)
+
+            if let searchIconImage = UIImage(named: "ico-search") {
+                let searchIconImageView = UIImageView(image: searchIconImage)
+                searchIconImageView.contentMode = .scaleAspectFit
+                let imageSize = searchIconImage.size
+                searchIconImageView.frame = CGRect(x: 0, y: 0, width: imageSize.width + 8, height: imageSize.height)
+
+                searchTextField.rightView = searchIconImageView
+                searchTextField.rightViewMode = .unlessEditing
+            }
+            
+        }, animated: animated)
+    }
+
     public func apply(toTextView textView: UITextView, animated: Bool = true) {
         apply(block: {
             self.applyConstraints(toView: textView)
@@ -247,6 +296,10 @@ extension ContainerStyle {
         apply(toTextField: textField, animated: true)
     }
 
+    public func apply(toSearchTextField searchTextField: UITextField) {
+        apply(toSearchTextField: searchTextField, animated: true)
+    }
+    
     public func apply(toTextView textView: UITextView) {
         apply(toTextView: textView, animated: true)
     }
