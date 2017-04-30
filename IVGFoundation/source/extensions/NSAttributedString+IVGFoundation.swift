@@ -32,7 +32,6 @@ public extension NSAttributedString {
                 if replacementKeys.contains(attributeName) {
                     if let replacementValue = replacements[attributeName] {
                         updatedAttributes[attributeName] = replacementValue
-
                     }
                 } else {
                     updatedAttributes[attributeName] = attributes[attributeName]
@@ -51,7 +50,7 @@ public extension NSAttributedString {
     public func wrapping(withAttributes wrappingAttributes: [String: Any?]) -> NSAttributedString {
         let range = NSRange(location: 0, length: length)
         var replacements: [String: Any?] = [:]
-        var newAttributes: [String: Any?] = [:]
+        var newAttributes: [String: Any] = [:]
         for key in wrappingAttributes.keys {
             replacements[key] = nil
             if let newValue = wrappingAttributes[key] {

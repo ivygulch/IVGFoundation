@@ -1,5 +1,5 @@
 //
-//  UIColor+Extensions.swift
+//  UIColor+IVGFoundation
 //  IVGFoundation
 //
 //  Created by Douglas Sjoquist on 5/20/16.

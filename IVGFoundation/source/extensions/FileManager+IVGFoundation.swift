@@ -1,5 +1,5 @@
 //
-//  NSFileManager+IVGFoundation.swift
+//  FileManager+IVGFoundation.swift
 //  IVGFoundation
 //
 //  Created by Douglas Sjoquist on 10/11/16.

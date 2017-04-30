@@ -1,5 +1,5 @@
 //
-//  UIImage+Extensions.swift
+//  UIImage+IVGFoundation
 //  IVGFoundation
 //
 //  Created by Douglas Sjoquist on 1/5/17.

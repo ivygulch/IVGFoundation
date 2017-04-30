@@ -1,5 +1,5 @@
 //
-//  NSURL+IVGFoundation.swift
+//  URL+IVGFoundation.swift
 //  IVGFoundation
 //
 //  Created by Douglas Sjoquist on 10/11/16.

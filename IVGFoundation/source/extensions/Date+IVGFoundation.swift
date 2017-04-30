@@ -1,5 +1,5 @@
 //
-//  NSDate+Extensions.swift
+//  Date+IVGFoundation.swift
 //  IVGFoundation
 //
 //  Created by Douglas Sjoquist on 4/17/16.
