@@ -54,7 +54,7 @@ public struct FontStyle {
             if let font = type.font(withSize: self.size) {
                 self.font = font
             } else {
-                print("WARNING: Could not load font: \(self.type) \(self.size)")
+                print("WARNING: Could not load font: \(String(describing: self.type)) \(self.size)")
                 self.font = nil
             }
         } else {
