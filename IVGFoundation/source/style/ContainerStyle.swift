@@ -142,6 +142,7 @@ public struct ContainerStyle {
         }
         if let cornerRadius = self.cornerRadius {
             layer.cornerRadius = cornerRadius
+            layer.masksToBounds = true
         }
         if let shadowColor = self.shadowColor {
             layer.shadowColor = shadowColor.cgColor
