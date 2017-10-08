@@ -17,7 +17,7 @@ public enum FontType {
         switch self {
         case let .system(weight):
             if let weight = weight {
-                return UIFont.systemFont(ofSize: size, weight: weight)
+                return UIFont.systemFont(ofSize: size, weight: UIFont.Weight(rawValue: weight))
             } else {
                 return UIFont.systemFont(ofSize: size)
             }
@@ -30,9 +30,9 @@ public enum FontType {
 
 public extension FontType {
     public static let systemRegular = FontType.system(nil)
-    public static let systemSemibold = FontType.system(UIFontWeightSemibold)
-    public static let systemBold = FontType.system(UIFontWeightBold)
-    public static let systemMedium = FontType.system(UIFontWeightMedium)
+    public static let systemSemibold = FontType.system(UIFont.Weight.semibold.rawValue)
+    public static let systemBold = FontType.system(UIFont.Weight.bold.rawValue)
+    public static let systemMedium = FontType.system(UIFont.Weight.medium.rawValue)
 }
 
 public struct FontStyleConstants {
@@ -157,13 +157,13 @@ public struct FontStyle {
         }
     }
 
-    public var attributes: [String: AnyObject]  {
-        var result: [String: AnyObject] = [:]
+    public var attributes: [NSAttributedStringKey: AnyObject]  {
+        var result: [NSAttributedStringKey: AnyObject] = [:]
         if let textColor = textColor {
-            result[NSForegroundColorAttributeName] = textColor
+            result[NSAttributedStringKey.foregroundColor] = textColor
         }
         if let font = font {
-            result[NSFontAttributeName] = font
+            result[NSAttributedStringKey.font] = font
         }
         return result
     }

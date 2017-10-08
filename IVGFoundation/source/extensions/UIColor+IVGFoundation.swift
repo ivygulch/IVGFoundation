@@ -13,7 +13,10 @@ private func doubleHexDigit(_ byte:Int) -> Int {
 }
 
 private func hexValue(_ hexString:String, _ start:Int, _ len:Int) -> Int? {
-    let hexSubstring = hexString.substring(with: hexString.characters.index(hexString.startIndex, offsetBy: start) ..< hexString.characters.index(hexString.startIndex, offsetBy: start+len))
+    let startIndex = hexString.index(hexString.startIndex, offsetBy: start)
+    let endIndex = hexString.index(hexString.startIndex, offsetBy: start + len)
+
+    let hexSubstring = hexString[startIndex ..< endIndex]
     return Int(hexSubstring, radix: 16)
 }
 
@@ -35,7 +38,8 @@ public extension UIColor {
         }
 
         if String(useString[useString.startIndex]) == "#" {
-            useString = useString.substring(from: useString.characters.index(useString.startIndex, offsetBy: 1))
+            let index = useString.index(after: useString.startIndex)
+            useString = String(useString[index...])
         }
 
         let len = useString.lengthOfBytes(using: String.Encoding.utf8)

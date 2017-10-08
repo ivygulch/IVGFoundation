@@ -16,7 +16,7 @@ public extension String {
 
     public var attributedStringFromHTML: NSAttributedString? {
         guard let data = self.data(using: .utf16, allowLossyConversion: false) else { return nil }
-        guard let result = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil) else { return nil }
+        guard let result = try? NSAttributedString(data: data, options: [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil) else { return nil }
         return result
     }
 
@@ -25,7 +25,7 @@ public extension String {
     }
 
     public func substring(withNSRange nsRange: NSRange) -> String? {
-        guard let range = nsRange.toRange() else { return nil }
+        guard let range = Range(nsRange) else { return nil }
 
         let start = utf16.index(utf16.startIndex, offsetBy: range.lowerBound)
         let end = utf16.index(utf16.startIndex, offsetBy: range.upperBound)
