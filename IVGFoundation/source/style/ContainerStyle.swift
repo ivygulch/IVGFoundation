@@ -197,12 +197,12 @@ public struct ContainerStyle {
 
             let placeholderText = (self.otherData as? String) ?? searchTextField.placeholder ?? "Search"
             if let otherFontStyle = self.otherFontStyle {
-                var attributes: [String: Any] = [:]
+                var attributes: [NSAttributedStringKey: Any] = [:]
                 if let font = otherFontStyle.font {
-                    attributes[NSFontAttributeName] = font
+                    attributes[NSAttributedStringKey.font] = font
                 }
                 if let textColor = otherFontStyle.textColor {
-                    attributes[NSForegroundColorAttributeName] = textColor
+                    attributes[NSAttributedStringKey.foregroundColor] = textColor
                 }
                 searchTextField.attributedPlaceholder = NSAttributedString(string: placeholderText, attributes: attributes)
             } else {
