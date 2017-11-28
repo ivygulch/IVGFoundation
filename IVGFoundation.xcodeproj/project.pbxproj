@@ -10,6 +10,7 @@
 		F83FD93B1EB6751C00469F2C /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83FD93A1EB6751C00469F2C /* Style.swift */; };
 		F83FD93D1EB6761400469F2C /* UIDevice+IVGFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83FD93C1EB6761400469F2C /* UIDevice+IVGFoundation.swift */; };
 		F83FD93F1EB677A900469F2C /* Dictionary+IVGFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83FD93E1EB677A900469F2C /* Dictionary+IVGFoundation.swift */; };
+		F846529D1FCE04610062D19D /* HTTPURLResponse+IVGFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F846529C1FCE04610062D19D /* HTTPURLResponse+IVGFoundation.swift */; };
 		F84F68781DADB2D1008F57BB /* FileManager+IVGFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84F68771DADB2D1008F57BB /* FileManager+IVGFoundation.swift */; };
 		F84F687A1DADB93C008F57BB /* URL+IVGFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84F68791DADB93C008F57BB /* URL+IVGFoundation.swift */; };
 		F85403F71E5F53CE0016DDC8 /* ContainerStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85403F41E5F53CE0016DDC8 /* ContainerStyle.swift */; };
@@ -174,6 +175,7 @@
 		F83FD93A1EB6751C00469F2C /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		F83FD93C1EB6761400469F2C /* UIDevice+IVGFoundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+IVGFoundation.swift"; sourceTree = "<group>"; };
 		F83FD93E1EB677A900469F2C /* Dictionary+IVGFoundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+IVGFoundation.swift"; sourceTree = "<group>"; };
+		F846529C1FCE04610062D19D /* HTTPURLResponse+IVGFoundation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTPURLResponse+IVGFoundation.swift"; sourceTree = "<group>"; };
 		F84F68771DADB2D1008F57BB /* FileManager+IVGFoundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager+IVGFoundation.swift"; sourceTree = "<group>"; };
 		F84F68791DADB93C008F57BB /* URL+IVGFoundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+IVGFoundation.swift"; sourceTree = "<group>"; };
 		F85403F41E5F53CE0016DDC8 /* ContainerStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerStyle.swift; sourceTree = "<group>"; };
@@ -239,6 +241,7 @@
 				F85404131E5F55C20016DDC8 /* UIImage+IVGFoundation.swift */,
 				F85404111E5F55860016DDC8 /* UIView+IVGFoundation.swift */,
 				F84F68791DADB93C008F57BB /* URL+IVGFoundation.swift */,
+				F846529C1FCE04610062D19D /* HTTPURLResponse+IVGFoundation.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -628,6 +631,7 @@
 				F85F92B41DA17F2F00241AB7 /* Synchronizer.swift in Sources */,
 				F85404101E5F55500016DDC8 /* Date+IVGFoundation.swift in Sources */,
 				F83FD93D1EB6761400469F2C /* UIDevice+IVGFoundation.swift in Sources */,
+				F846529D1FCE04610062D19D /* HTTPURLResponse+IVGFoundation.swift in Sources */,
 				F88070171E4E0BCE0052468D /* String+IVGFoundation.swift in Sources */,
 				F83FD93F1EB677A900469F2C /* Dictionary+IVGFoundation.swift in Sources */,
 				F85403F81E5F53CE0016DDC8 /* FontStyle.swift in Sources */,
