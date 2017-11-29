@@ -33,6 +33,7 @@
 		F8B8B3051E4640DD004542AB /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8B8B3041E4640DD004542AB /* Quick.framework */; };
 		F8B8B30B1E467712004542AB /* NSAttributedString+IVGFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B8B30A1E467712004542AB /* NSAttributedString+IVGFoundation.swift */; };
 		F8B8B30D1E467BDE004542AB /* AttrbutedStringExtensionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B8B30C1E467BDE004542AB /* AttrbutedStringExtensionsSpec.swift */; };
+		F8DAA1831FCE5A3D0015B200 /* NextResponderHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DAA1821FCE5A3D0015B200 /* NextResponderHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -204,6 +205,7 @@
 		F8B8B3061E464169004542AB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F8B8B30A1E467712004542AB /* NSAttributedString+IVGFoundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+IVGFoundation.swift"; sourceTree = "<group>"; };
 		F8B8B30C1E467BDE004542AB /* AttrbutedStringExtensionsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttrbutedStringExtensionsSpec.swift; sourceTree = "<group>"; };
+		F8DAA1821FCE5A3D0015B200 /* NextResponderHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextResponderHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -305,6 +307,7 @@
 				F85F92B01DA17F2F00241AB7 /* TypeKey.swift */,
 				F85F92B11DA17F2F00241AB7 /* URLResourceCache.swift */,
 				F85F92BC1DA17FE200241AB7 /* Types.swift */,
+				F8DAA1821FCE5A3D0015B200 /* NextResponderHelper.swift */,
 			);
 			path = common;
 			sourceTree = "<group>";
@@ -620,6 +623,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F85F92B61DA17F2F00241AB7 /* URLResourceCache.swift in Sources */,
+				F8DAA1831FCE5A3D0015B200 /* NextResponderHelper.swift in Sources */,
 				F85F92B51DA17F2F00241AB7 /* TypeKey.swift in Sources */,
 				F84F687A1DADB93C008F57BB /* URL+IVGFoundation.swift in Sources */,
 				F85F92BD1DA17FE200241AB7 /* Types.swift in Sources */,
