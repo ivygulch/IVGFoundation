@@ -31,4 +31,21 @@ public extension String {
         let end = utf16.index(utf16.startIndex, offsetBy: range.upperBound)
         return String(describing: utf16[start..<end])
     }
+
 }
+
+public extension String {
+
+    public func isValid(withRegEx pattern: String) -> Bool {
+        guard let regEx = try? NSRegularExpression(pattern: pattern, options: []) else { return false }
+
+        let range = NSRange(location: 0, length: self.count)
+        return !regEx.matches(in: self, options: [], range: range).isEmpty
+    }
+
+    public static let emailRegEx = "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"
+
+    public var isValidEmail: Bool { return isValid(withRegEx: String.emailRegEx) }
+
+}
+
