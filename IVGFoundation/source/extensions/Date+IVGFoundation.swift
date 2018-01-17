@@ -8,7 +8,19 @@
 
 import Foundation
 
+private var dateFormatters: [String: DateFormatter] = [:]
+
 public extension Date {
+
+    private static func dateFormatter(for format: String) -> DateFormatter {
+        if let result = dateFormatters[format] {
+            return result
+        }
+        let result = DateFormatter()
+        result.dateFormat = format
+        dateFormatters[format] = result
+        return result
+    }
 
     public static func dateFromYear(_ year: Int, month: Int, day: Int, hour: Int = 0, minute: Int = 0, second: Int = 0, nanosecond: Int = 0) -> Date? {
         var dateComponents = DateComponents()
@@ -23,15 +35,11 @@ public extension Date {
     }
 
     public static func dateFromString(_ string: String, format: String) -> Date? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = format
-        return dateFormatter.date(from: string)
+        return Date.dateFormatter(for: format).date(from: string)
     }
 
     public func stringWithFormat(_ format: String) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = format
-        return dateFormatter.string(from: self)
+        return Date.dateFormatter(for: format).string(from: self)
     }
 
 }
