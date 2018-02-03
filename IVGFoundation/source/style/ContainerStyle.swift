@@ -11,6 +11,7 @@ import UIKit
 public struct ContainerStyle {
     public let backgroundColor: UIColor?
     public let selectedColor: UIColor?
+    public let disabledColor: UIColor?
     public let borderColor: UIColor?
     public let borderWidth: CGFloat?
     public let cornerRadius: CGFloat?
@@ -26,11 +27,12 @@ public struct ContainerStyle {
     public let horizontalAlignment: UIControlContentHorizontalAlignment?
     public let verticalAlignment: UIControlContentVerticalAlignment?
 
-    public init(style: ContainerStyle? = nil, backgroundColor: UIColor? = nil, normalFontStyle: FontStyle? = nil, selectedColor: UIColor? = nil, selectedFontStyle: FontStyle? = nil, otherFontStyle: FontStyle? = nil, otherData: Any? = nil, borderColor: UIColor? = nil, borderWidth: CGFloat? = nil, cornerRadius: CGFloat? = nil, shadowColor: UIColor? = nil, shadowOffset: CGSize? = nil, height: CGFloat? = nil, adjustsFontSizeToFitWidth: Bool? = nil, minimumScaleFactor: CGFloat? = nil, horizontalAlignment: UIControlContentHorizontalAlignment? = nil, verticalAlignment: UIControlContentVerticalAlignment? = nil) {
+    public init(style: ContainerStyle? = nil, backgroundColor: UIColor? = nil, normalFontStyle: FontStyle? = nil, selectedColor: UIColor? = nil, selectedFontStyle: FontStyle? = nil, disabledColor: UIColor? = nil, otherFontStyle: FontStyle? = nil, otherData: Any? = nil, borderColor: UIColor? = nil, borderWidth: CGFloat? = nil, cornerRadius: CGFloat? = nil, shadowColor: UIColor? = nil, shadowOffset: CGSize? = nil, height: CGFloat? = nil, adjustsFontSizeToFitWidth: Bool? = nil, minimumScaleFactor: CGFloat? = nil, horizontalAlignment: UIControlContentHorizontalAlignment? = nil, verticalAlignment: UIControlContentVerticalAlignment? = nil) {
         self.backgroundColor = backgroundColor ?? style?.backgroundColor
         self.normalFontStyle = normalFontStyle ?? style?.normalFontStyle
         self.selectedColor = selectedColor ?? style?.selectedColor
         self.selectedFontStyle = selectedFontStyle ?? style?.selectedFontStyle
+        self.disabledColor = disabledColor ?? style?.disabledColor
         self.otherFontStyle = otherFontStyle ?? style?.otherFontStyle
         self.otherData = otherData ?? style?.otherData
         self.borderColor = borderColor ?? style?.borderColor
@@ -53,8 +55,12 @@ public struct ContainerStyle {
         return ContainerStyle(style: self, selectedColor: selectedColor)
     }
 
+    public func setDisabledColor(_ disabledColor: UIColor) -> ContainerStyle {
+        return ContainerStyle(style: self, disabledColor: disabledColor)
+    }
+
     public func setBorderColor(_ borderColor: UIColor) -> ContainerStyle {
-        return ContainerStyle(style: self, selectedColor: borderColor)
+        return ContainerStyle(style: self, borderColor: borderColor)
     }
 
     public func setBorderWidth(_ borderWidth: CGFloat) -> ContainerStyle {
@@ -247,6 +253,9 @@ public struct ContainerStyle {
             }
             if let selectedColor = self.selectedColor {
                 button.setBackgroundColor(color: selectedColor, forState: .selected)
+            }
+            if let disabledColor = self.disabledColor {
+                button.setBackgroundColor(color: disabledColor, forState: .disabled)
             }
             if let adjustsFontSizeToFitWidth = self.adjustsFontSizeToFitWidth {
                 button.titleLabel?.adjustsFontSizeToFitWidth = adjustsFontSizeToFitWidth
