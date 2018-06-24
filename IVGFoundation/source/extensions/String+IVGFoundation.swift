@@ -27,9 +27,9 @@ public extension String {
     public func substring(withNSRange nsRange: NSRange) -> String? {
         guard let range = Range(nsRange) else { return nil }
 
-        let start = utf16.index(utf16.startIndex, offsetBy: range.lowerBound)
-        let end = utf16.index(utf16.startIndex, offsetBy: range.upperBound)
-        return String(describing: utf16[start..<end])
+        let start = index(startIndex, offsetBy: range.lowerBound)
+        let end = index(startIndex, offsetBy: range.upperBound)
+        return String(describing: self[start..<end])
     }
 
 }
