@@ -20,8 +20,9 @@ public extension String {
         return result
     }
 
-    public var stringFromHTML: String? {
-        return attributedStringFromHTML?.string
+    public func stringFromHTML(stripNewLines: Bool = true) -> String? {
+        let result = attributedStringFromHTML?.string
+        return stripNewLines ? result?.replacingOccurrences(of: "\n", with: "") : result
     }
 
     public func substring(withNSRange nsRange: NSRange) -> String? {
