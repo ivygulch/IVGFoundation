@@ -22,14 +22,6 @@ public extension UIImage {
         self.init(cgImage: cgImage)
     }
 
-    public func pngCIDInfo(name: String) -> (String,String)? {
-        guard let imageData = UIImagePNGRepresentation(self) else { return nil }
-
-        let imageBase64 = imageData.base64EncodedString(options: .lineLength64Characters)
-        let imageCID = "cid:\(name)"
-        return (imageCID,imageBase64)
-    }
-
     public func with(size targetSize: CGSize) -> UIImage? {
         let widthRatio  = targetSize.width  / size.width
         let heightRatio = targetSize.height / size.height
