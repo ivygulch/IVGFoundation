@@ -32,5 +32,24 @@ public extension URL {
     var localFilename: String {
         return absoluteString.components(separatedBy: invalidFilenameCharacterSet).joined(separator: "_")
     }
-    
+
+    public func loadData(completion: @escaping  ((Result<Data>) -> Void)) {
+        let session = URLSession.shared
+
+        let request = URLRequest(url: self)
+        let task = session.dataTask(with: request, completionHandler: { (data, response, error) in
+            DispatchQueue.main.async {
+                if let data = data {
+                    completion(.success(data))
+                } else if let error = error {
+                    completion(.failure(error))
+                } else {
+                    completion(.failure(URLResourceCacheError.invalidResponse(value: response)))
+                }
+            }
+        })
+
+        task.resume()
+    }
+
 }
