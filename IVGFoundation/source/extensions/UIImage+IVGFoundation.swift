@@ -36,4 +36,8 @@ public extension UIImage {
         return newImage
     }
 
+    public var base64EncodedPNG: String? {
+        guard let data = UIImagePNGRepresentation(self) else { return nil }
+        return data.base64EncodedString()
+    }
 }
