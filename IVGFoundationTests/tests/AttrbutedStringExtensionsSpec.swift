@@ -23,36 +23,36 @@ class AttrbutedStringExtensionsSpec: QuickSpec {
                 let fontB = UIFont(name: "Cochin", size: 10.0)!
                 let fontC = UIFont(name: "Courier", size: 15.0)!
                 let source = NSAttributedString.concatenated(fromValues: [
-                    ("a", [NSAttributedStringKey.font: fontA, NSAttributedStringKey.strokeColor: UIColor.blue, NSAttributedStringKey.backgroundColor: UIColor.yellow]),
+                    ("a", [NSAttributedString.Key.font: fontA, NSAttributedString.Key.strokeColor: UIColor.blue, NSAttributedString.Key.backgroundColor: UIColor.yellow]),
                     ("b", nil),
-                    ("c", [NSAttributedStringKey.foregroundColor: UIColor.red, NSAttributedStringKey.font: fontB])
+                    ("c", [NSAttributedString.Key.foregroundColor: UIColor.red, NSAttributedString.Key.font: fontB])
                     ])
 
                 it("should replace appropriate elements") {
                     let expected = NSAttributedString.concatenated(fromValues: [
-                        ("a", [NSAttributedStringKey.font: fontC, NSAttributedStringKey.strokeColor: UIColor.blue]),
+                        ("a", [NSAttributedString.Key.font: fontC, NSAttributedString.Key.strokeColor: UIColor.blue]),
                         ("b", nil),
-                        ("c", [NSAttributedStringKey.foregroundColor: UIColor.green, NSAttributedStringKey.font: fontC])
+                        ("c", [NSAttributedString.Key.foregroundColor: UIColor.green, NSAttributedString.Key.font: fontC])
                         ])
                     let actual = source
-                        .replacing(attribute: NSAttributedStringKey.backgroundColor, withValue: nil)
-                        .replacing(attribute: NSAttributedStringKey.font, withValue: fontC)
-                        .replacing(attribute: NSAttributedStringKey.foregroundColor, withValue: UIColor.green)
+                        .replacing(attribute: NSAttributedString.Key.backgroundColor, withValue: nil)
+                        .replacing(attribute: NSAttributedString.Key.font, withValue: fontC)
+                        .replacing(attribute: NSAttributedString.Key.foregroundColor, withValue: UIColor.green)
                     expect(actual).to(equal(expected))
                 }
 
                 it("should wrap appropriate elements") {
                     let mutableString = NSMutableAttributedString(attributedString: NSAttributedString.concatenated(fromValues: [
-                        ("a", [NSAttributedStringKey.font: fontA, NSAttributedStringKey.strokeColor: UIColor.blue, NSAttributedStringKey.backgroundColor: UIColor.yellow]),
+                        ("a", [NSAttributedString.Key.font: fontA, NSAttributedString.Key.strokeColor: UIColor.blue, NSAttributedString.Key.backgroundColor: UIColor.yellow]),
                         ("b", nil),
-                        ("c", [NSAttributedStringKey.font: fontB])
+                        ("c", [NSAttributedString.Key.font: fontB])
                         ]))
                     let fullRange = NSRange(location: 0, length: mutableString.length)
-                    mutableString.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.orange, range: fullRange)
+                    mutableString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.orange, range: fullRange)
                     let expected = NSAttributedString(attributedString: mutableString)
 
                     let actual = source
-                        .wrapping(withAttribute: NSAttributedStringKey.foregroundColor, value: UIColor.orange)
+                        .wrapping(withAttribute: NSAttributedString.Key.foregroundColor, value: UIColor.orange)
                     expect(actual).to(equal(expected))
                 }
             }

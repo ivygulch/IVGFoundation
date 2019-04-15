@@ -74,8 +74,8 @@ public struct StyleSet {
         }
     }
 
-    public func attributes(forSizeClass sizeClass: UIUserInterfaceSizeClass) -> [NSAttributedStringKey: AnyObject]  {
-        var result: [NSAttributedStringKey: AnyObject] = [:]
+    public func attributes(forSizeClass sizeClass: UIUserInterfaceSizeClass) -> [NSAttributedString.Key: AnyObject]  {
+        var result: [NSAttributedString.Key: AnyObject] = [:]
         for style in styles {
             if style.matches(sizeClass: sizeClass, userInterfaceIdiom: UIDevice.current.userInterfaceIdiom) {
                 if case let .Font(fontStyle) = style.style {

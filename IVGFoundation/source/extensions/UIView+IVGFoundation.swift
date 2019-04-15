@@ -32,12 +32,12 @@ public enum NSLayoutConstraintPosition {
     case Second
 }
 
-public typealias NSLayoutConstraintMatcher = ((NSLayoutConstraint,UIView,NSLayoutConstraintPosition,NSLayoutAttribute,NSLayoutRelation,AnyObject?) -> Bool)
+public typealias NSLayoutConstraintMatcher = ((NSLayoutConstraint,UIView,NSLayoutConstraintPosition,NSLayoutConstraint.Attribute,NSLayoutConstraint.Relation,AnyObject?) -> Bool)
 public typealias NSLayoutConstraintAndOwner = (NSLayoutConstraint,UIView)
 
 public extension UIView {
 
-    public func firstConstraint(matchingAttribute: NSLayoutAttribute, relation matchingRelation: NSLayoutRelation) -> NSLayoutConstraintAndOwner? {
+    public func firstConstraint(matchingAttribute: NSLayoutConstraint.Attribute, relation matchingRelation: NSLayoutConstraint.Relation) -> NSLayoutConstraintAndOwner? {
         let constraints = relatedConstraints() { (constraint,owner,position,attribute,relation,otherItem) -> Bool in
             return attribute == matchingAttribute && relation == matchingRelation
         }
@@ -63,7 +63,7 @@ public extension UIView {
         return result
     }
 
-    private func reverseRelation(relation: NSLayoutRelation) -> NSLayoutRelation {
+    private func reverseRelation(relation: NSLayoutConstraint.Relation) -> NSLayoutConstraint.Relation {
         switch relation {
         case .lessThanOrEqual: return .greaterThanOrEqual
         case .equal: return .equal

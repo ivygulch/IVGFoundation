@@ -89,7 +89,7 @@ fileprivate class NextResponderHelperTextFieldDelegate: NSObject, UITextFieldDel
     }
 
     @available(iOS 10.0, *)
-    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
         textFieldDelegate?.textFieldDidEndEditing?(textField, reason: reason)
     }
 

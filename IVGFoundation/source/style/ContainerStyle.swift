@@ -24,10 +24,10 @@ public struct ContainerStyle {
     public let height: CGFloat?
     public let adjustsFontSizeToFitWidth: Bool?
     public let minimumScaleFactor: CGFloat?
-    public let horizontalAlignment: UIControlContentHorizontalAlignment?
-    public let verticalAlignment: UIControlContentVerticalAlignment?
+    public let horizontalAlignment: UIControl.ContentHorizontalAlignment?
+    public let verticalAlignment: UIControl.ContentVerticalAlignment?
 
-    public init(style: ContainerStyle? = nil, backgroundColor: UIColor? = nil, normalFontStyle: FontStyle? = nil, selectedColor: UIColor? = nil, selectedFontStyle: FontStyle? = nil, disabledColor: UIColor? = nil, otherFontStyle: FontStyle? = nil, otherData: Any? = nil, borderColor: UIColor? = nil, borderWidth: CGFloat? = nil, cornerRadius: CGFloat? = nil, shadowColor: UIColor? = nil, shadowOffset: CGSize? = nil, height: CGFloat? = nil, adjustsFontSizeToFitWidth: Bool? = nil, minimumScaleFactor: CGFloat? = nil, horizontalAlignment: UIControlContentHorizontalAlignment? = nil, verticalAlignment: UIControlContentVerticalAlignment? = nil) {
+    public init(style: ContainerStyle? = nil, backgroundColor: UIColor? = nil, normalFontStyle: FontStyle? = nil, selectedColor: UIColor? = nil, selectedFontStyle: FontStyle? = nil, disabledColor: UIColor? = nil, otherFontStyle: FontStyle? = nil, otherData: Any? = nil, borderColor: UIColor? = nil, borderWidth: CGFloat? = nil, cornerRadius: CGFloat? = nil, shadowColor: UIColor? = nil, shadowOffset: CGSize? = nil, height: CGFloat? = nil, adjustsFontSizeToFitWidth: Bool? = nil, minimumScaleFactor: CGFloat? = nil, horizontalAlignment: UIControl.ContentHorizontalAlignment? = nil, verticalAlignment: UIControl.ContentVerticalAlignment? = nil) {
         self.backgroundColor = backgroundColor ?? style?.backgroundColor
         self.normalFontStyle = normalFontStyle ?? style?.normalFontStyle
         self.selectedColor = selectedColor ?? style?.selectedColor
@@ -99,11 +99,11 @@ public struct ContainerStyle {
         return ContainerStyle(style: self, height: height)
     }
 
-    public func setHorizontalAlignment(_ horizontalAlignment: UIControlContentHorizontalAlignment) -> ContainerStyle {
+    public func setHorizontalAlignment(_ horizontalAlignment: UIControl.ContentHorizontalAlignment) -> ContainerStyle {
         return ContainerStyle(style: self, horizontalAlignment: horizontalAlignment)
     }
 
-    public func setVerticalAlignment(_ verticalAlignment: UIControlContentVerticalAlignment) -> ContainerStyle {
+    public func setVerticalAlignment(_ verticalAlignment: UIControl.ContentVerticalAlignment) -> ContainerStyle {
         return ContainerStyle(style: self, verticalAlignment: verticalAlignment)
     }
 
@@ -203,12 +203,12 @@ public struct ContainerStyle {
 
             let placeholderText = (self.otherData as? String) ?? searchTextField.placeholder ?? "Search"
             if let otherFontStyle = self.otherFontStyle {
-                var attributes: [NSAttributedStringKey: Any] = [:]
+                var attributes: [NSAttributedString.Key: Any] = [:]
                 if let font = otherFontStyle.font {
-                    attributes[NSAttributedStringKey.font] = font
+                    attributes[NSAttributedString.Key.font] = font
                 }
                 if let textColor = otherFontStyle.textColor {
-                    attributes[NSAttributedStringKey.foregroundColor] = textColor
+                    attributes[NSAttributedString.Key.foregroundColor] = textColor
                 }
                 searchTextField.attributedPlaceholder = NSAttributedString(string: placeholderText, attributes: attributes)
             } else {

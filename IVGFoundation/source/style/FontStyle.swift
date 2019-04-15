@@ -132,7 +132,7 @@ public struct FontStyle {
         }, animated: animated)
     }
 
-    public func apply(toButton button: UIButton?, controlState: UIControlState = .normal, animated: Bool = true) {
+    public func apply(toButton button: UIButton?, controlState: UIControl.State = .normal, animated: Bool = true) {
         guard let button = button else { return }
 
         apply(block: {
@@ -157,13 +157,13 @@ public struct FontStyle {
         }
     }
 
-    public var attributes: [NSAttributedStringKey: AnyObject]  {
-        var result: [NSAttributedStringKey: AnyObject] = [:]
+    public var attributes: [NSAttributedString.Key: AnyObject]  {
+        var result: [NSAttributedString.Key: AnyObject] = [:]
         if let textColor = textColor {
-            result[NSAttributedStringKey.foregroundColor] = textColor
+            result[NSAttributedString.Key.foregroundColor] = textColor
         }
         if let font = font {
-            result[NSAttributedStringKey.font] = font
+            result[NSAttributedString.Key.font] = font
         }
         return result
     }

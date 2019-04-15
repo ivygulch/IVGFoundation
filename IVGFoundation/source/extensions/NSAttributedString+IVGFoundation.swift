@@ -10,7 +10,7 @@ import Foundation
 
 public extension NSAttributedString {
 
-    public static func concatenated(fromValues values: [(String, [NSAttributedStringKey: Any]?)]) -> NSAttributedString {
+    public static func concatenated(fromValues values: [(String, [NSAttributedString.Key: Any]?)]) -> NSAttributedString {
         let result = NSMutableAttributedString()
         for (string, attributes) in values {
             if let attributes = attributes {
@@ -22,12 +22,12 @@ public extension NSAttributedString {
         return NSAttributedString(attributedString: result)
     }
 
-    public func withReplacements(_ replacements: [NSAttributedStringKey: Any?]) -> NSAttributedString {
+    public func withReplacements(_ replacements: [NSAttributedString.Key: Any?]) -> NSAttributedString {
         let range = NSRange(location: 0, length: length)
         let result = NSMutableAttributedString()
         let replacementKeys = Set(replacements.keys)
         enumerateAttributes(in: range, options: .longestEffectiveRangeNotRequired, using: { (attributes, range, _) in
-            var updatedAttributes: [NSAttributedStringKey: Any] = [:]
+            var updatedAttributes: [NSAttributedString.Key: Any] = [:]
             for attributeName in attributes.keys {
                 if replacementKeys.contains(attributeName) {
                     if let replacementValue = replacements[attributeName] {
@@ -43,14 +43,14 @@ public extension NSAttributedString {
         return NSAttributedString(attributedString: result)
     }
     
-    public func replacing(attribute attributeName: NSAttributedStringKey, withValue value: Any?) -> NSAttributedString {
+    public func replacing(attribute attributeName: NSAttributedString.Key, withValue value: Any?) -> NSAttributedString {
         return withReplacements([attributeName: value])
     }
 
-    public func wrapping(withAttributes wrappingAttributes: [NSAttributedStringKey: Any?]) -> NSAttributedString {
+    public func wrapping(withAttributes wrappingAttributes: [NSAttributedString.Key: Any?]) -> NSAttributedString {
         let range = NSRange(location: 0, length: length)
-        var replacements: [NSAttributedStringKey: Any?] = [:]
-        var newAttributes: [NSAttributedStringKey: Any] = [:]
+        var replacements: [NSAttributedString.Key: Any?] = [:]
+        var newAttributes: [NSAttributedString.Key: Any] = [:]
         for key in wrappingAttributes.keys {
             replacements[key] = nil
             if let newValue = wrappingAttributes[key] {
@@ -62,7 +62,7 @@ public extension NSAttributedString {
         return NSAttributedString(attributedString: result)
     }
     
-    public func wrapping(withAttribute attributeName: NSAttributedStringKey, value: Any?) -> NSAttributedString {
+    public func wrapping(withAttribute attributeName: NSAttributedString.Key, value: Any?) -> NSAttributedString {
         return wrapping(withAttributes: [attributeName: value])
     }
 
